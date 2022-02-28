@@ -1,11 +1,12 @@
 <template>
-  <StartScreen v-if="condi" />
+  <StartScreen v-if="condi" :toggle="switchScreens" />
   <GameScreen v-else />
 </template>
 
 <script>
 import StartScreen from './components/StartScreen.vue';
 import GameScreen from './components/GameScreen.vue';
+import { ref } from '@vue/reactivity';
 
 export default {
   name: 'App',
@@ -14,9 +15,13 @@ export default {
     GameScreen,
   },
   setup() {
-    const condi = false;
+    const condi = ref(true);
 
-    return { condi };
+    const switchScreens = () => {
+      condi.value = !condi.value;
+    };
+
+    return { condi, switchScreens };
   },
 };
 </script>

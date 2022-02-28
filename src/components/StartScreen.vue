@@ -18,12 +18,17 @@
 <script>
 export default {
   name: 'StartScreen',
-  setup() {
+  props: ['toggle'],
+  setup(props) {
     const handleClick = (e) => {
       document
         .querySelectorAll('.active')
         .forEach((btn) => btn.classList.remove('active'));
       e.target.classList.add('active');
+
+      setTimeout(() => {
+        props.toggle();
+      }, 500);
     };
 
     return { handleClick };

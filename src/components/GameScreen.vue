@@ -1,49 +1,19 @@
 <template>
   <div class="board">
     <div class="board-wrap">
-      <div class="row">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class="row">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class="row">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class="row">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div class="row">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div v-for="(row, index) in boxes" :key="index" class="row">
+        <div v-for="(box, i) in row" :key="i" :class="`${box ? 'filled' : ''}`">
+          {{ box }}
+        </div>
       </div>
     </div>
   </div>
-  <div class="keys-wrap">
-    <div class="keys">
+  <div class="keys-wrap" @keyup="press">
+    <div class="keys" @click="press">
       <div
         v-for="key in keys"
         :key="key"
-        :class="`${'<>'.includes(key) ? 'span-two' : ''}`"
+        :class="`${'<>'.includes(key) ? 'span-two ' : 'btn'}`"
       >
         {{ key }}
       </div>
@@ -52,12 +22,42 @@
 </template>
 
 <script>
+import { getWord } from '@/words';
+import { ref } from '@vue/reactivity';
 export default {
   name: 'GameScreen',
   setup() {
-    const keys = 'qwert<yuiopasdfghjklzxcvbnm>'.split('');
+    const word = getWord();
+    const keys = 'QWERTYUIOPASDFGHJKLZXCVB<NM>'.split('');
 
-    return { keys };
+    const boxes = ref([
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+    ]);
+
+    let box = 0;
+    let row = 0;
+
+    console.log(word);
+
+    const press = (e) => {
+      if (
+        !keys.filter((k) => !'<>'.includes(k)).includes(e.key.toUpperCase()) ||
+        // !e.target.className.includes('btn') ||
+        box >= 5
+      )
+        return;
+
+      boxes.value[row][box] = e.key ? e.key.toUpperCase() : e.target.innerText;
+      box++;
+    };
+
+    document.body.addEventListener('keypress', press);
+
+    return { keys, press, boxes };
   },
 };
 </script>
@@ -76,6 +76,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  text-align: center;
 }
 
 .board .row {
@@ -87,6 +88,15 @@ export default {
   width: 50px;
   height: 50px;
   border: 2px solid var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.6rem;
+  font-weight: bold;
+}
+
+.board .row .filled {
+  border-color: var(--dark-color);
 }
 
 .board .row .active {
