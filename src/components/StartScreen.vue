@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'App',
+  name: 'StartScreen',
   setup() {
     const handleClick = (e) => {
       document

@@ -1,14 +1,22 @@
 <template>
-  <Start />
+  <StartScreen v-if="condi" />
+  <GameScreen v-else />
 </template>
 
 <script>
-import Start from './components/Start.vue';
+import StartScreen from './components/StartScreen.vue';
+import GameScreen from './components/GameScreen.vue';
 
 export default {
   name: 'App',
   components: {
-    Start,
+    StartScreen,
+    GameScreen,
+  },
+  setup() {
+    const condi = false;
+
+    return { condi };
   },
 };
 </script>
