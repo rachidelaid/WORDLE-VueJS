@@ -40,7 +40,13 @@
   </div>
   <div class="keys-wrap">
     <div class="keys">
-      <div v-for="key in keys" :key="key">{{ key }}</div>
+      <div
+        v-for="key in keys"
+        :key="key"
+        :class="`${'<>'.includes(key) ? 'span-two' : ''}`"
+      >
+        {{ key }}
+      </div>
     </div>
   </div>
 </template>
@@ -49,7 +55,7 @@
 export default {
   name: 'GameScreen',
   setup() {
-    const keys = 'qwerty<uiopasdfghjklzxcvbnm>'.split('');
+    const keys = 'qwert<yuiopasdfghjklzxcvbnm>'.split('');
 
     return { keys };
   },
@@ -59,7 +65,7 @@ export default {
 <style scoped>
 .board {
   width: 100vw;
-  height: calc(100vh - 250px);
+  height: calc(100vh - 200px);
   background-color: var(--light-bg);
   display: flex;
   justify-content: center;
@@ -89,7 +95,7 @@ export default {
 
 .keys-wrap {
   width: 100vw;
-  height: 250px;
+  height: 200px;
   background-color: var(--bg);
   display: flex;
   justify-content: center;
@@ -98,7 +104,7 @@ export default {
 
 .keys {
   display: grid;
-  grid-template-columns: repeat(7, 35px);
+  grid-template-columns: repeat(8, 35px);
   gap: 0.5rem;
   place-items: center;
 }
@@ -112,5 +118,9 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.span-two {
+  grid-column: span 3;
 }
 </style>
