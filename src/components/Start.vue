@@ -8,8 +8,8 @@
     </div>
     <div class="wrapper">
       <div class="actions">
-        <button class="active"><span>></span> Play</button>
-        <button><span>></span> Settings</button>
+        <button @click="handleClick"><span>></span> Play</button>
+        <button @click="handleClick"><span>></span> Settings</button>
       </div>
     </div>
   </div>
@@ -18,6 +18,16 @@
 <script>
 export default {
   name: 'App',
+  setup() {
+    const handleClick = (e) => {
+      document
+        .querySelectorAll('.active')
+        .forEach((btn) => btn.classList.remove('active'));
+      e.target.classList.add('active');
+    };
+
+    return { handleClick };
+  },
 };
 </script>
 
@@ -71,7 +81,15 @@ export default {
   font-weight: bold;
 }
 
+.actions button span {
+  visibility: hidden;
+}
+
 .actions button.active {
   border-color: var(--dark-bg);
+}
+
+.actions button.active span {
+  visibility: visible;
 }
 </style>
