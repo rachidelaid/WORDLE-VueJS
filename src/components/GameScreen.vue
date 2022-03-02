@@ -1,4 +1,5 @@
 <template>
+  <ThemeModal />
   <div class="board">
     <div class="board-wrap">
       <small
@@ -35,10 +36,14 @@
 </template>
 
 <script>
+import ThemeModal from './ThemeModal.vue';
 import { checkWord, getWord } from '@/words';
 import { ref } from '@vue/reactivity';
 export default {
   name: 'GameScreen',
+  components: {
+    ThemeModal,
+  },
   setup() {
     const error = ref('');
     const win = ref(false);
