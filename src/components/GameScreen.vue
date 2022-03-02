@@ -79,19 +79,19 @@ export default {
             .forEach((div) => (div.className = 'correct'));
         } else if (word.includes(box.toLowerCase())) {
           document
-            .querySelectorAll(`.keys #${box}`)
+            .querySelectorAll(`.keys #${box}:not(.correct)`)
             .forEach((div) => (div.className = 'btn mid'));
 
           rowElm
-            .querySelectorAll(`#${box}`)
+            .querySelectorAll(`#${box}:not(.correct)`)
             .forEach((div) => (div.className = 'mid'));
         } else {
           document
-            .querySelectorAll(`.keys #${box}`)
+            .querySelectorAll(`.keys #${box}:not(.correct):not(.mid)`)
             .forEach((div) => (div.className = 'btn wrong'));
 
           rowElm
-            .querySelectorAll(`#${box}`)
+            .querySelectorAll(`#${box}:not(.correct):not(.mid)`)
             .forEach((div) => (div.className = 'wrong'));
         }
       });
@@ -200,7 +200,7 @@ export default {
 .keys {
   display: grid;
   grid-template-columns: repeat(8, 35px);
-  gap: 0.5rem;
+  gap: 0.2rem;
   place-items: center;
 }
 
