@@ -15,7 +15,7 @@ export default {
     GameScreen,
   },
   setup() {
-    const condi = ref(true);
+    const condi = ref(false);
 
     const switchScreens = () => {
       condi.value = !condi.value;
@@ -39,6 +39,7 @@ export default {
 
 :root {
   --bg: #8b966e;
+  --accent-color: #5d6942;
   --dark-bg: #1f1f1f;
   --light-bg: #c4d0a3;
 }
@@ -47,5 +48,32 @@ export default {
   font-family: 'VT323', monospace;
   font-size: 130%;
   color: var(--dark-bg);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 </style>
