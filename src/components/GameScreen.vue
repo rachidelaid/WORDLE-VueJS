@@ -96,6 +96,11 @@ export default {
         }
       });
 
+      if (boxes.value[row].join('').toLowerCase() === word) {
+        error.value = 'congrats you have won';
+        return;
+      }
+
       box = 0;
       row++;
     };
