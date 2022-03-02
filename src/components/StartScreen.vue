@@ -8,8 +8,10 @@
     </div>
     <div class="wrapper">
       <div class="actions">
-        <button @click="handleClick"><span>></span> Play</button>
-        <button @click="handleClick"><span>></span> Settings</button>
+        <button @click="handleClick" id="game"><span>></span> Play</button>
+        <button @click="handleClick" id="how">
+          <span>></span> How to play
+        </button>
       </div>
     </div>
   </div>
@@ -27,7 +29,7 @@ export default {
       e.target.classList.add('active');
 
       setTimeout(() => {
-        props.toggle();
+        props.toggle(e.target.id);
       }, 500);
     };
 

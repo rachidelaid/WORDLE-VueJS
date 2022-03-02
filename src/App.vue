@@ -1,11 +1,13 @@
 <template>
-  <StartScreen v-if="condi" :toggle="switchScreens" />
-  <GameScreen v-else />
+  <StartScreen v-if="condi === 'start'" :toggle="switchScreens" />
+  <GameScreen v-if="condi === 'game'" />
+  <HowScreen v-if="condi === 'how'" />
 </template>
 
 <script>
 import StartScreen from './components/StartScreen.vue';
 import GameScreen from './components/GameScreen.vue';
+import HowScreen from './components/HowScreen.vue';
 import { ref } from '@vue/reactivity';
 
 export default {
@@ -13,12 +15,13 @@ export default {
   components: {
     StartScreen,
     GameScreen,
+    HowScreen,
   },
   setup() {
-    const condi = ref(false);
+    const condi = ref('start');
 
-    const switchScreens = () => {
-      condi.value = !condi.value;
+    const switchScreens = (id) => {
+      condi.value = id;
     };
 
     return { condi, switchScreens };
