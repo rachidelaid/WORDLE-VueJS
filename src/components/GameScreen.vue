@@ -1,7 +1,13 @@
 <template>
   <div class="board">
     <div class="board-wrap">
-      <small>{{ error }}</small>
+      <small
+        >{{ error }}
+        <span v-if="win" class="playAgain" @click="playAgain"
+          >play again</span
+        ></small
+      >
+
       <div v-for="(row, index) in boxes" :key="index" class="row">
         <div
           v-for="(box, i) in row"
@@ -35,8 +41,9 @@ export default {
   name: 'GameScreen',
   setup() {
     const error = ref('');
+    const win = ref(false);
 
-    const word = getWord();
+    let word = getWord();
     const keys = 'QWERTYUIOPASDFGHJKLZXCVB<NM>'.split('');
 
     const boxes = ref([
@@ -98,6 +105,7 @@ export default {
 
       if (boxes.value[row].join('').toLowerCase() === word) {
         error.value = 'congrats you have won';
+        win.value = true;
         return;
       }
 
@@ -150,7 +158,28 @@ export default {
       box++;
     };
 
-    return { error, keys, handleClick, boxes };
+    const playAgain = () => {
+      box = 0;
+      row = 0;
+      word = getWord();
+      console.log(word);
+      boxes.value = [
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+      ];
+      document.querySelectorAll('.keys div').forEach((div) => {
+        div.classList.remove('mid');
+        div.classList.remove('correct');
+        div.classList.remove('wrong');
+      });
+      win.value = false;
+      error.value = '';
+    };
+
+    return { win, error, keys, handleClick, boxes, playAgain };
   },
 };
 </script>
@@ -245,5 +274,10 @@ export default {
 
 .mid {
   background-color: var(--accent-color);
+}
+
+.playAgain {
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
