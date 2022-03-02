@@ -1,7 +1,7 @@
 <template>
   <StartScreen v-if="condi === 'start'" :toggle="switchScreens" />
   <GameScreen v-if="condi === 'game'" />
-  <HowScreen v-if="condi === 'how'" />
+  <HowScreen v-if="condi === 'how'" :toggle="switchScreens" />
 </template>
 
 <script>

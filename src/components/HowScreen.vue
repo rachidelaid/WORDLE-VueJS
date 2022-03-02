@@ -1,5 +1,11 @@
 <template>
   <div class="how-to">
+    <svg @click="goHome" style="width: 24px; height: 24px" viewBox="0 0 24 24">
+      <path
+        fill="currentColor"
+        d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"
+      />
+    </svg>
     <h1>1</h1>
     <h2>Enter the first word</h2>
     <p>
@@ -32,6 +38,13 @@
 <script>
 export default {
   name: 'HowScreen',
+  props: ['toggle'],
+  setup(props) {
+    const goHome = () => {
+      props.toggle('start');
+    };
+    return { goHome };
+  },
 };
 </script>
 
@@ -48,5 +61,19 @@ export default {
 
 img {
   margin-bottom: 2rem;
+}
+
+svg {
+  position: fixed;
+  right: 0.5rem;
+  top: 0.5rem;
+  color: var(--dark-bg);
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+}
+
+svg:hover {
+  color: var(--accent-color);
+  transform: scale(1.1);
 }
 </style>

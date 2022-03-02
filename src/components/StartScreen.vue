@@ -30,7 +30,7 @@ export default {
 
       setTimeout(() => {
         props.toggle(e.target.id);
-      }, 500);
+      }, 300);
     };
 
     return { handleClick };
