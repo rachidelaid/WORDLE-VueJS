@@ -26,6 +26,50 @@ export default {
 
     return { condi, switchScreens };
   },
+  mounted() {
+    const themes = [
+      {
+        bg: '#8b966e',
+        light: '#c4d0a3',
+        dark: '#1f1f1f',
+        accent: '#5d6942',
+      },
+      {
+        bg: '#966d8c',
+        light: '#d1a3bd',
+        dark: '#210317',
+        accent: '#773863',
+      },
+      {
+        bg: '#5e7a9e',
+        light: '#a3b3d1',
+        dark: '#020a21',
+        accent: '#0052bf',
+      },
+      {
+        bg: '#9e775d',
+        light: '#e2c29c',
+        dark: '#211201',
+        accent: '#bf6200',
+      },
+    ];
+
+    const index = JSON.parse(localStorage.getItem('themeIndex')) || '0';
+
+    document.documentElement.style.setProperty('--bg', themes[+index].bg);
+    document.documentElement.style.setProperty(
+      '--accent-color',
+      themes[+index].accent,
+    );
+    document.documentElement.style.setProperty(
+      '--dark-bg',
+      themes[+index].dark,
+    );
+    document.documentElement.style.setProperty(
+      '--light-bg',
+      themes[+index].light,
+    );
+  },
 };
 </script>
 

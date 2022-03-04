@@ -77,6 +77,16 @@ export default {
     const selectTheme = (id) => {
       selectedIndex.value = id;
       localStorage.setItem('themeIndex', id);
+      document.documentElement.style.setProperty('--bg', themes[+id].bg);
+      document.documentElement.style.setProperty(
+        '--accent-color',
+        themes[+id].accent,
+      );
+      document.documentElement.style.setProperty('--dark-bg', themes[+id].dark);
+      document.documentElement.style.setProperty(
+        '--light-bg',
+        themes[+id].light,
+      );
     };
 
     return { themes, selectedIndex, selectTheme };
