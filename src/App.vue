@@ -123,4 +123,8 @@ export default {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+* {
+  scrollbar-color: var(--light-bg) var(--accent-color);
+}
 </style>
