@@ -119,7 +119,7 @@ export default {
     };
 
     const handlePress = (e) => {
-      if (row > 4) return;
+      if (row > 4 || e.ctrlKey || e.altKey || e.shiftKey) return;
 
       if (e.key === 'Enter') {
         submit();
