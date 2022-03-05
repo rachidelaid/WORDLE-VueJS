@@ -62,8 +62,6 @@ export default {
     let box = 0;
     let row = 0;
 
-    console.log(word);
-
     const submit = () => {
       if (box < 5 || document.querySelector('.shake')) return;
 
@@ -167,7 +165,6 @@ export default {
       box = 0;
       row = 0;
       word = getWord();
-      console.log(word);
       boxes.value = [
         ['', '', '', '', ''],
         ['', '', '', '', ''],
